@@ -1,0 +1,49 @@
+@use "fonts";
+
+body {
+  background: linear-gradient(90deg, rgb(20, 19, 27), rgb(8, 7, 11) 100%);
+}
+
+:root {
+  --main-font-color: rgb(19, 48, 65);
+}
+
+.text-preset-1 {
+  color: var(--main-font-color);
+  font-family: JetBrains Mono;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 42px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.text-preset-2 {
+  color: var(--main-font-color);
+  font-family: JetBrains Mono;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.text-preset-3 {
+  color: var(--main-font-color);
+  font-family: JetBrains Mono;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.text-preset-4 {
+  color: var(--main-font-color);
+  font-family: JetBrains Mono;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+}
