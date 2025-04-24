@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-password-generator-form',
   imports: [],
   templateUrl: './password-generator-form.component.html',
-  styleUrl: './password-generator-form.component.scss'
+  styleUrl: './password-generator-form.component.scss',
 })
-export class PasswordGeneratorFormComponent {
-
-}
+export class PasswordGeneratorFormComponent {}
