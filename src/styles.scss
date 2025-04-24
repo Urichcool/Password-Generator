@@ -1,0 +1,54 @@
+
+@use "fonts";
+
+
+html,
+body {
+  height: 100%;
+}
+
+
+
+body {
+  margin: 0;
+  font-family: JetBrains Mono, sans-serif;
+  background: linear-gradient(90deg, rgb(20, 19, 27), rgb(8, 7, 11) 100%);
+}
+
+:root {
+  --main-componets-bg-color: #24232C;
+  --secondary-text-color: #817d92;
+}
+
+.text-preset-1 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 42px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.text-preset-2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.text-preset-3 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.text-preset-4 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
