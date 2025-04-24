@@ -1,9 +1,17 @@
-import { Component } from '@angular/core';
+import { ClipboardModule, Clipboard } from '@angular/cdk/clipboard';
+import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-password-generator-form',
-  imports: [],
+  imports: [ClipboardModule],
   templateUrl: './password-generator-form.component.html',
   styleUrl: './password-generator-form.component.scss',
 })
-export class PasswordGeneratorFormComponent {}
+export class PasswordGeneratorFormComponent {
+  passwordToCopy: string = '';
+  clipboard = inject(Clipboard);
+
+  copyToClipboard(text: string) {
+    this.clipboard.copy(text);
+  }
+}
