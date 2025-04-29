@@ -11,9 +11,14 @@ export class PasswordGeneratorFormComponent {
   passwordToCopy: string = '';
   rangeValue: number = 4;
   clipboard = inject(Clipboard);
+  copied:boolean = false
 
   copyToClipboard(text: string) {
-    this.clipboard.copy(text);
+    if(text){
+      this.clipboard.copy(text);
+      this.copied = true;
+      setTimeout(() => this.copied = false, 2000)
+    }
   }
 
   onRangeInput(event: Event) {
