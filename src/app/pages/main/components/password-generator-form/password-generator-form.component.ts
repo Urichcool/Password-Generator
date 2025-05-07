@@ -1,23 +1,36 @@
 import { ClipboardModule, Clipboard } from '@angular/cdk/clipboard';
+import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { GeneratePassword } from 'js-generate-password';
 
 @Component({
   selector: 'app-password-generator-form',
-  imports: [ClipboardModule, ReactiveFormsModule],
+  imports: [ClipboardModule, ReactiveFormsModule, NgClass],
   templateUrl: './password-generator-form.component.html',
   styleUrl: './password-generator-form.component.scss',
 })
 export class PasswordGeneratorFormComponent {
   generator = GeneratePassword;
-  passwordForm = new FormGroup({
-    passwordToCopy: new FormControl(''),
-    length: new FormControl(4),
-    uppercaseCheckbox: new FormControl(false),
-    lowercaseCheckbox: new FormControl(false),
-    numbersCheckbox: new FormControl(false),
-    symbolsCheckbox: new FormControl(false),
+  passwordForm: FormGroup<{
+    passwordToCopy: FormControl<string>;
+    length: FormControl<number>;
+    uppercaseCheckbox: FormControl<boolean>;
+    lowercaseCheckbox: FormControl<boolean>;
+    numbersCheckbox: FormControl<boolean>;
+    symbolsCheckbox: FormControl<boolean>;
+  }> = new FormGroup({
+    passwordToCopy: new FormControl('', { nonNullable: true }),
+    length: new FormControl(4, { nonNullable: true }),
+    uppercaseCheckbox: new FormControl(false, { nonNullable: true }),
+    lowercaseCheckbox: new FormControl(false, { nonNullable: true }),
+    numbersCheckbox: new FormControl(false, { nonNullable: true }),
+    symbolsCheckbox: new FormControl(false, { nonNullable: true }),
   });
   clipboard = inject(Clipboard);
   copied: boolean = false;
@@ -40,8 +53,6 @@ export class PasswordGeneratorFormComponent {
     });
 
     this.passwordForm.patchValue({ passwordToCopy: password });
-
-    console.log(this.passwordForm.value);
   }
 
   onRangeInput(event: Event) {
