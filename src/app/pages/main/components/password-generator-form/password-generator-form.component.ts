@@ -1,12 +1,23 @@
 import { ClipboardModule, Clipboard } from '@angular/cdk/clipboard';
-import { NgClass } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { GeneratePassword } from 'js-generate-password';
+import { PasswordStrengthPipe } from '../../../../pipes/password-strength.pipe';
+import { PasswordStrengthLabelPipe } from '../../../../pipes/password-strength-label.pipe';
+import { CopyToClipboardDirective } from '../../../../directives/copy-to-clipboard.directive';
 
 @Component({
   selector: 'app-password-generator-form',
-  imports: [ClipboardModule, ReactiveFormsModule, NgClass],
+  imports: [
+    ClipboardModule,
+    ReactiveFormsModule,
+    NgClass,
+    PasswordStrengthPipe,
+    PasswordStrengthLabelPipe,
+    NgStyle,
+    CopyToClipboardDirective,
+  ],
   templateUrl: './password-generator-form.component.html',
   styleUrl: './password-generator-form.component.scss',
 })
@@ -30,18 +41,22 @@ export class PasswordGeneratorFormComponent {
   clipboard = inject(Clipboard);
   copied: boolean = false;
 
+  checkboxOptions: { label: string; controlName: string }[] = [
+    { label: 'Include Uppercase Letters', controlName: 'uppercaseCheckbox' },
+    { label: 'Include Lowercase Letters', controlName: 'lowercaseCheckbox' },
+    { label: 'Include Numbers', controlName: 'numbersCheckbox' },
+    { label: 'Include Symbols', controlName: 'symbolsCheckbox' },
+  ];
 
-
-  copyToClipboard(text: string) {
-    if (text) {
-      this.clipboard.copy(text);
+  onCopied(success: boolean) {
+    if (success) {
       this.copied = true;
       setTimeout(() => (this.copied = false), 2000);
     }
   }
 
-  onChange(){
-    this.passwordForm.patchValue({ passwordToCopy: "" });
+  onChange() {
+    this.passwordForm.patchValue({ passwordToCopy: '' });
   }
 
   onSubmit() {
@@ -64,31 +79,5 @@ export class PasswordGeneratorFormComponent {
       100;
     input.style.background = `linear-gradient(to right, #A4FFAF ${value}%, #18171F ${value}%)`;
     this.passwordForm.value.length = Number(input.value);
-  }
-
-  passwordStrengthNumber(values: {
-    uppercaseCheckbox: boolean | undefined;
-    lowercaseCheckbox: boolean | undefined;
-    numbersCheckbox: boolean | undefined;
-    symbolsCheckbox: boolean | undefined;
-  }) {
-    let counter: number = 0;
-    const valuesArray: (boolean | undefined)[] = Object.values(values);
-    for (let i = 0; i < valuesArray.length; i += 1) {
-      if (valuesArray[i]) {
-        counter += 1;
-      }
-    }
-    return counter;
-  }
-
-  passwordStrengthText(strength: number) {
-    if (strength >= 2 && strength < 4) {
-      return 'medium';
-    }
-    if (strength === 4) {
-      return 'strong';
-    }
-    return 'weak';
   }
 }
