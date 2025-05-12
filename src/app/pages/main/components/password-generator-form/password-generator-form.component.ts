@@ -2,10 +2,10 @@ import { ClipboardModule, Clipboard } from '@angular/cdk/clipboard';
 import { NgClass, NgStyle } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { GeneratePassword } from 'js-generate-password';
 import { PasswordStrengthPipe } from '../../../../pipes/password-strength.pipe';
 import { PasswordStrengthLabelPipe } from '../../../../pipes/password-strength-label.pipe';
 import { CopyToClipboardDirective } from '../../../../directives/copy-to-clipboard.directive';
+import { PasswordGenerateService } from '../../../../services/password-generate.service';
 
 @Component({
   selector: 'app-password-generator-form',
@@ -22,7 +22,7 @@ import { CopyToClipboardDirective } from '../../../../directives/copy-to-clipboa
   styleUrl: './password-generator-form.component.scss',
 })
 export class PasswordGeneratorFormComponent {
-  generator = GeneratePassword;
+  generator = inject(PasswordGenerateService);
   passwordForm: FormGroup<{
     passwordToCopy: FormControl<string>;
     length: FormControl<number>;
@@ -59,8 +59,8 @@ export class PasswordGeneratorFormComponent {
     this.passwordForm.patchValue({ passwordToCopy: '' });
   }
 
-  onSubmit() {
-    const password: string = this.generator({
+  async onSubmit() {
+    const password = await this.generator.generatePassword({
       length: this.passwordForm.value.length,
       uppercase: this.passwordForm.value.uppercaseCheckbox,
       lowercase: this.passwordForm.value.lowercaseCheckbox,
