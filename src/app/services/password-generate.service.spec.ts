@@ -1,4 +1,8 @@
 import { TestBed } from '@angular/core/testing';
+
+
+
+
 import { PasswordGenerateService } from './password-generate.service';
 
 describe('PasswordGenerateService', () => {
@@ -12,6 +16,7 @@ describe('PasswordGenerateService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
 
   it('should call GeneratePassword with given options and return result as string', async () => {
     const fakePassword = 'Abc123!';
@@ -47,4 +52,6 @@ describe('PasswordGenerateService', () => {
     expect(mockGeneratePassword).toHaveBeenCalledWith(options);
     expect(result).toBe(fakePassword);
   });
+
+
 });

@@ -2,10 +2,14 @@ import { ClipboardModule, Clipboard } from '@angular/cdk/clipboard';
 import { NgClass, NgStyle } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
 import { PasswordGenerateService } from '../../../../services/password-generate.service';
+
+
 import { PasswordStrengthPipe } from '../../../../pipes/password-strength.pipe';
 import { PasswordStrengthLabelPipe } from '../../../../pipes/password-strength-label.pipe';
 import { CopyToClipboardDirective } from '../../../../directives/copy-to-clipboard.directive';
+import { PasswordGenerateService } from '../../../../services/password-generate.service';
 
 @Component({
   selector: 'app-password-generator-form',
@@ -60,7 +64,11 @@ export class PasswordGeneratorFormComponent {
   }
 
   async onSubmit() {
+
     const password: string = await this.generator.generatePassword({
+
+    const password = await this.generator.generatePassword({
+
       length: this.passwordForm.value.length,
       uppercase: this.passwordForm.value.uppercaseCheckbox,
       lowercase: this.passwordForm.value.lowercaseCheckbox,
