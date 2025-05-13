@@ -14,3 +14,4 @@ export class PasswordGenerateService {
     const { GeneratePassword } = await import('js-generate-password');
     return String(GeneratePassword(options));
   }
+}
