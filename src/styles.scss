@@ -35,6 +35,17 @@ body {
   --accent-text-color: #A4FFAF;
 }
 
+
+.container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 327px;
+  @media screen and (min-width: 768px) {
+     max-width: 689px;
+  }
+}
+
 .text-preset-1 {
   font-size: 32px;
   font-weight: 700;
