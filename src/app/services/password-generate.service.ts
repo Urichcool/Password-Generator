@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import generatePassword from 'generate-password-browser';
+
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +13,6 @@ export class PasswordGenerateService {
     numbers: boolean | undefined;
     symbols: boolean | undefined;
   }): Promise<string> {
-    const { GeneratePassword } = await import('js-generate-password');
-    return String(GeneratePassword(options));
+    return generatePassword.generate(options);
   }
 }

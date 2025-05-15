@@ -1,8 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
-
-
-
 import { PasswordGenerateService } from './password-generate.service';
 
 describe('PasswordGenerateService', () => {
